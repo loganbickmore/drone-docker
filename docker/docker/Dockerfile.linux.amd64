@@ -1,4 +1,9 @@
-FROM docker:18.06-dind
+FROM golang as build
+ENV GO111MODULE=on
+WORKDIR /app
+COPY . .
+RUN go build -ldflags "-X main.build=34" -a -tags netgo -o /bin/drone-docker ./cmd/drone-docker
 
-ADD release/linux/amd64/drone-docker /bin/
+FROM docker:18.06-dind
+COPY --from=build /bin/drone-docker /bin/
 ENTRYPOINT ["/usr/local/bin/dockerd-entrypoint.sh", "/bin/drone-docker"]

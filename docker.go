@@ -67,6 +67,7 @@ type (
 
 // Exec executes the plugin step
 func (p Plugin) Exec() error {
+    fmt.Println("ENTRY TO PLUGIN")
 	// start the Docker daemon server
 	if !p.Daemon.Disabled {
 		cmd := commandDaemon(p.Daemon)

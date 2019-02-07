@@ -14,6 +14,7 @@ import (
 var build = "0" // build number set at compile-time
 
 func main() {
+    fmt.Println("MAIN ENTRY LOG")
 	// Load env-file if it exists first
 	if env := os.Getenv("PLUGIN_ENV_FILE"); env != "" {
 		godotenv.Load(env)
